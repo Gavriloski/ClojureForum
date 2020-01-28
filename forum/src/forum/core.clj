@@ -6,12 +6,17 @@
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.util.response :as ring] 
             [compojure.route :as route]
-            [compojure.core :refer [defroutes GET POST]]))
+            [compojure.core :refer [defroutes GET POST]]
+            [forum.templates :as template]))
 
 (defn foo
   "Proba prva"
   [x]
   (println x "Hello, World!"))
 
+(defn index []
+   (template/header )
+  )
 (defroutes f_routes
+  (GET "/" [] (index))
   (route/resources "/"))

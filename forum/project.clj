@@ -10,6 +10,7 @@
                  [ring/ring-jetty-adapter "1.7.0"]
                  [ring/ring-core "1.7.0"]
                  [ring-json-response "0.2.0"]
-                 [compojure "1.4.0"]]
+                 [compojure "1.4.0"]
+                 [hiccup "1.0.5"]]  
    :plugins [[lein-ring "0.12.5"]]
    :ring { :handler forum.controller/run})

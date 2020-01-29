@@ -12,10 +12,16 @@
             [forum.database :as db]))
 
 (defn index []
-   (template/main (page/index (db/posts)))
+   (template/main (page/index (db/posts) (db/stats)))
+  )
+
+(defn post [id]
+   (template/main (page/postpage (db/getpost id) (db/getanswers id)))
   )
 
 
 (defroutes f_routes
   (GET "/" [] (index))
+  (GET "/post/:id" [id] (post id))
+  (GET "/profile/:id" [id] )
   (route/resources "/"))

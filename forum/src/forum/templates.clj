@@ -21,4 +21,22 @@
   ]
   ]]
 body
+[:div {:class "footer"}
+	[:nav {:class "navbar-default text-center " :id "nav-bottom-first"}
+		[:div {:class "container"}
+			[:div {:class "navbar-header"}
+      			[:a {:class "navbar-brand" :href "/"}"AskForum"]
+    		]
+			[:ul {:class "nav navbar-nav navbar-right"}
+    [:li [:a {:href "/"}"Home"]]
+    [:li [:a {:href "/contact"}"Contact"]]
+]
+		]
+	]
+
+	[:nav {:class "navbar navbar-inverse text-center" :id "nav-bottom-second"}
+		[:div {:class "container text-center"}
+		]
+	]
+]
    ))

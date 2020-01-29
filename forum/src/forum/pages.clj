@@ -82,7 +82,6 @@
 (map 
  (fn [post]
 [:div {:class "container" :id "test"}
- 
 	[:h1 {:class "page-header"} (:title post) ]
 	[:div {:class "row"}
 		[:div {:class "col-lg-12"}
@@ -158,4 +157,59 @@
 
 ]		) post)
   )
-
+(defn profile [user]
+  (map 
+    (fn [user]
+  [:div {:class "container"}
+[:div {:class "page-header"}
+            [:h1 "Profile"]]
+      [:div {:class "row"}
+        [:div {:class "col-lg-12 toppad"}
+          [:div {:class "panel panel-info"}
+            [:div {:class "panel-heading"}
+              [:h2 {:class "panel-title"} (:nick user)]
+            ]
+            [:div {:class "panel-body"}
+              [:div {:class "row"}
+                [:div {:class "col-lg-3 col-lg-offset-1 " :align "center"}
+                 [:img {:alt "User Pic" :src (:avatar user) :class "img-circle img-responsive" :width "200px" :height "200px"} 
+                ]
+              
+                [:div {:class "col-lg-7 col-lg-offset-1 "} 
+                  [:table {:class "table table-user-information"}
+                    [:tbody
+                      [:tr
+                        [:td "E-mail adress:"]
+                        [:td (:mail user) ]
+                      ]
+                      [:tr
+                        [:td "Date Joined"]
+                        [:td (:joindate user)]
+                      ]
+                      [:tr
+                        [:td "Country:"]
+                        [:td (:countryname user)]
+                      ]
+                         [:tr
+                             [:tr
+                        [:td "Gender:"]
+                        [:td (:gender user)]
+                      ]
+                       [:tr
+                        [:td "Role:"]
+                        [:td (:rolename user)]
+                      ]
+                      [:tr
+                        [:td "Answers:"]
+                        [:td  (:answers user) ]
+                      ]
+                      [:tr
+                        [:td "Posts:"]
+                        [:td (:posts user)]
+                      ]   
+                      ]
+                    ]]
+                ]]
+            ]]]]]
+]) user)
+  ) 

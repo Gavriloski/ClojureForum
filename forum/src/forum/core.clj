@@ -18,10 +18,13 @@
 (defn post [id]
    (template/main (page/postpage (db/getpost id) (db/getanswers id)))
   )
+(defn profile [id]
+   (template/main (page/profile (db/getuser id)))
+  )
 
 
 (defroutes f_routes
   (GET "/" [] (index))
   (GET "/post/:id" [id] (post id))
-  (GET "/profile/:id" [id] )
+  (GET "/profile/:id" [id] (profile id) )
   (route/resources "/"))

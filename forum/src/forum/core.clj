@@ -17,6 +17,7 @@
   )
 
 (defn post [id]
+  (db/updateview id)
    (template/main (page/postpage (db/getpost id) (db/getanswers id)))
   )
 (defn profile [id]

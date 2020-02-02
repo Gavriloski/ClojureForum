@@ -17,6 +17,9 @@
 (defn getpost [postid]
   (into [] (sql/query connection ["SELECT U.Avatar,U.Nick,U.UserID,U.JoinDate,Q.Date AS QDate, Q.Locked,Q.Description, Q.Title FROM users AS U INNER JOIN question as Q ON Q.AuthorID = U.UserID WHERE Q.QuestionID =?" postid]))
   )
+(defn updateview [id]
+  (sql/update! connection :question {:questionid id :views (:views + 1) } ["questionid = ?" id]))
+
 (defn getanswers [postid]
   (into [] (sql/query connection ["SELECT U.Avatar,U.Nick,U.UserID,U.JoinDate,A.Date, A.Text FROM users AS U INNER JOIN answer as A ON A.UserID = U.UserID WHERE A.QuestionID =?" postid])))
 

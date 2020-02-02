@@ -6,9 +6,15 @@
 html{
 	position: relative;
     min-height: 100%;
+    height: 100%; 
+    max-height: 100%; 
+ overflow: auto;
 }
 body{
 	font-family: 'Open Sans', sans-serif;
+    height: 100%; 
+    max-height: 100%; 
+ overflow: auto;
 }
 #top{
 	height:50px;
@@ -81,7 +87,7 @@ body{
 
 .footer{
 	position: absolute;
-	margin-top: 200px;
+	
 	left:0px;
     bottom: 0;
     width: 100%;

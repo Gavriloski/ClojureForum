@@ -23,5 +23,11 @@
 (defn getuser [userid]
   (into [] (sql/query connection ["SELECT U.Gender,U.JoinDate,U.Avatar,U.Nick,U.Mail,C.CountryName,R.RoleName,COUNT(Q.QuestionID) AS Posts,(SELECT COUNT(AnswerID) FROM answer WHERE UserID = ?) as answers FROM users AS U INNER JOIN roles AS R ON U.RoleID = R.RoleID INNER JOIN countries AS C ON U.CountryID = C.CountryID INNER JOIN question AS Q ON U.UserID = Q.AuthorID WHERE U.UserID = ? GROUP BY(U.UserID)" userid userid])))
 
+(defn getusers []
+  (into [] (sql/query connection ["SELECT U.UserID,U.Nick FROM users AS U "])))
+
+(defn addpost [title text userid]
+  (sql/insert! connection :question [:title :date :authorid :description :views] [title (read-string (clojure.string/replace (str (java.time.LocalDate/now)) #"-" "" )) (read-string userid) text 0]))
+
 (defn postsfilter [filter]
    (into [] (sql/query connection ["SELECT U.UserID,Q.QuestionID,Q.Title,Q.Date,U.Nick,Q.Views,Q.Locked, COUNT(A.AnswerID) as answers FROM question AS Q INNER JOIN users AS U ON Q.AuthorID = U.UserID LEFT OUTER JOIN answer as A on Q.QuestionID = A.QuestionID WHERE Q.Title LIKE ? GROUP BY 1,2,3,4,5,6,7 ORDER BY Date DESC" (str "%" filter "%")])))

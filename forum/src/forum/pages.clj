@@ -217,9 +217,16 @@
             ]]]]]
 ]) user)
   ) 
-(defn newpost [] 
+(defn newpost [users greska] 
+  [:div
  [:div {:class "container"}
-	[:h1 {:class "page-header"} "Post new questions"]
+  
+  (if-not (= greska "")
+    (do 
+      [:h4 {:style "color:red"} greska])
+    )
+  
+	[:h3 {:class "page-header"} "Post new questions"]
 	[:div {:class "well"}
     "Please be specific about your question"]
 	]
@@ -236,13 +243,26 @@
     [:div {:class "form-group"}
      [:label {:class "col-lg-2 col-lg-offset-1"} "Question:"]
      [:div {:class "col-lg-9"}
-					[:textarea {:class "form-control" :rows "20" :name="text" :required "true"}]
+					[:textarea {:class "form-control" :rows "20" :name "text" :required "true"}]
 				]]
+    [:div {:class "form-group"}
+     [:label {:class "col-lg-2 col-lg-offset-1"} "User:"]
+     [:div {:class "col-lg-9"}
+[:select {:name "user" :class "form-control" :id "user" :required "true"}
+              (map (fn [user]
+                 [:option {:value (:userid user)} (:nick user)]) users)
+              ]
 
+]]
+    [:div {:class "form-group"}
+     [:label {:class "col-lg-2 col-lg-offset-1"} "Verification code:"]
+     [:div {:class "col-lg-9"}
+      [:input {:type "text" :name "id" :required "true" :class "form-control" :placeholder "User's verification code"}]
+]]
 				 [:div {:class "form-group"}
 					[:div {:class "col-lg-9 col-lg-offset-3"}
             [:input {:type "submit" :class "btn btn-primary half" :value "Post" :name "btnSubmitPost"}]
             [:input {:type "reset" :class "btn btn-primary half" :value "Reset"}]
                 ]
 				])]
-		])
+		]])

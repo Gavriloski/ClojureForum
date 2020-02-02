@@ -35,10 +35,5 @@ body
 ]
 		]
 	]
-
-	[:nav {:class "navbar navbar-inverse text-center" :id "nav-bottom-second"}
-		[:div {:class "container text-center"}
-		]
-	]
 ]
    ))

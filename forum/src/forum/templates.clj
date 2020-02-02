@@ -9,14 +9,14 @@
   (h/html5
     [:head
      [:title "Ask"]
-     (include-css "/css/main.css" "/css/lightbox.min.css" "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" "https://fonts.googleapis.com/css?family=Open+Sans:400i,700")
+     (include-css "/css/main.css" "/css/lightbox.min.css" "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" "https://fonts.googleapis.com/css?family=Open+Sans:400i,700")
      ]
 [:nav {:class "navbar navbar-default text-center" }
 	[:div {:class "container"}
   [:ul {:class "nav navbar-nav"}
 
 			[:li [:a {:href "/"} "Home"]]
-			[:li [:a {:href ""} "Members Gallery"]]
+			[:li [:a {:href "/gallery"} "Members Gallery"]]
 			[:li [:a {:href ""} "Contact"]]
    ]
   ;

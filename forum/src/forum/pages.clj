@@ -53,9 +53,12 @@
 ]
 
 [:div {:class "title"}
-		[:h2 [:a {:href (str "/post/" (h (:questionid post)))} (:title post) ]  ]]
+		[:h2 [:a {:href (str "/post/" (h (:questionid post)) "/0" )} (:title post) ]  ]]
+[:div {:class "postby"} 
+ [:a {:href (str "/post/" (h (:questionid post)) "/1" )} [:i {:class "fa fa-trash"}] ]]
 [:div {:class "postby"}
-		"posted by " [:a {:href (str "/profile/" (h (:userid post)))} (:nick post)] " on "(:date post)]
+		"posted by " [:a {:href (str "/profile/" (h (:userid post)))} (:nick post)] " on "(:date post) "-"]
+
   ]
 ) posts)
 	[:div {:id "pag"}
@@ -81,12 +84,39 @@
  ]
 )
 
-(defn postpage [post answers]
+(defn postpage [post answers del uspesno]
   (def x 0)
+;[:div
 (map 
  (fn [post]
+   
 [:div {:class "container" :id "test"}
-	[:h1 {:class "page-header"} (:title post) ]
+    (if (= del "1") 
+     (do 
+       [:div {:class "container"}
+        [:h3 {:class "page-header" :style "color:red"} "Deleting post: "  ]
+       (form/form-to [:post "/delete"]
+      (anti-forgery/anti-forgery-field)
+      (form/hidden-field "qid" (:questionid post))
+      (form/hidden-field "uid" (:userid post))
+       [:div {:class "form-group"}
+     [:label {:class "col-lg-2 col-lg-offset-1"} "Verification code:"]
+     [:div {:class "col-lg-9"}
+      [:input {:type "text" :name "id" :required "true" :class "form-control" :placeholder "User's verification code"}]
+]]
+				 [:div {:class "form-group"}
+					[:div {:class "col-lg-9 col-lg-offset-3"}
+            [:input {:type "submit" :class "btn btn-primary half" :value "Delete" :name "btnSubmitPost"}]
+                   [:input {:type "reset" :class "btn btn-primary half" :value "Reset"}]
+                   ]
+     ])]
+       )
+     )
+    (if (= uspesno "0") 
+     (do 
+       [:h4 {:style "color:red"} "Error - Check your verification code."]
+       ))
+     [:h1 {:class "page-header"} (:title post)]
 	[:div {:class "row"}
 		[:div {:class "col-lg-12"}
 			[:div {:class "panel panel-primary singlepost"}
@@ -121,8 +151,8 @@
 	]
 ]
 				 ( if (not-empty answers) 
-      (do 
-        (map 
+(do 
+  (map 
  (fn [answer]
 		[:div {:clas "row"}
 		[:div {:class "col-lg-12"}
@@ -160,7 +190,7 @@
 ))
 
 ]		) post)
-  )
+ )
 (defn profile [user]
   (map 
     (fn [user]
@@ -266,3 +296,17 @@
                 ]
 				])]
 		]])
+
+(defn gallery [avatars] 
+  [:div {:class "container"}
+	[:h1 {:class "page-header"} "Members Gallery"]
+]
+
+				[:div {:class "container" :id "gallery"}
+				 (map (fn [avatar]
+            [:a {:href (:avatar avatar) :data-lightbox "gallery" :data-title (:nick avatar)}
+             [:img {:src (:avatar avatar)}]
+             [:span {:class "text-center" :style "display:block"} (:nick avatar)]]
+            )avatars)
+        ]
+  )

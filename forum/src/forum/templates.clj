@@ -1,7 +1,9 @@
 (ns forum.templates
   (:use [hiccup.element :only (link-to)])
   (:require [hiccup.page :as h]
-            [hiccup.page :refer [html5 include-css]]))
+            [hiccup.page :refer [html5 include-css]]
+            [hiccup.form :as form]
+            [ring.util.anti-forgery :as anti-forgery]))
 
 (defn main [body]
   (h/html5
@@ -17,8 +19,8 @@
 			[:li [:a {:href ""} "Members Gallery"]]
 			[:li [:a {:href ""} "Contact"]]
    ]
-		[:div {:id "login" :class "right"}
-  ]
+  ;
+		[:div {:id "login" :class "right"}]
   ]]
 body
 [:div {:class "footer"}

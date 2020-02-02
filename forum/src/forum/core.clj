@@ -21,10 +21,16 @@
 (defn profile [id]
    (template/main (page/profile (db/getuser id)))
   )
-
-
+(defn newpost []
+   (template/main (page/newpost))
+  )
+(defn searchpost [filter]
+  
+  )
 (defroutes f_routes
   (GET "/" [] (index))
   (GET "/post/:id" [id] (post id))
   (GET "/profile/:id" [id] (profile id) )
+  (GET "/newpost" [] (newpost) )
+  (POST "/" [filter] (searchpost filter) )
   (route/resources "/"))

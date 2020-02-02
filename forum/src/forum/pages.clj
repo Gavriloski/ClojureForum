@@ -7,32 +7,35 @@
      [hiccup.form :as form]
      [ring.util.anti-forgery :as anti-forgery]))
 
-(defn index [posts, stats]
-       [:div {:class "container" :id "search-post"}
-		[:div {:class "row"}
-			[:div {:class "col-lg-9"}
-				[:div {:class "input-group"}
-	    			[:input {:type "text" :class "form-control" :placeholder "Search by title" :id "search"}]
-	    		[:div {:class "input-group-btn"}
-		      		[:button {:class "btn btn-default" :type "submit" :id "glyph"}
-		        		[:i {:class "glyphicon glyphicon-search" :id "glyphicon-search"}]
-	      			]
+(defn index [posts stats]
+  [:div
+    (form/form-to [:post "/"]
+    (anti-forgery/anti-forgery-field)
+    [:div {:class "container" :id "search-post" :style "background:#FFF"}
+	[:div {:class "row"}
+		[:div {:class "col-lg-9"}
+			[:div {:class "input-group"}
+	   			[:input {:type "text" :name "filter" :class "form-control" :placeholder "Search by title" :id "search" }]
+	   		[:div {:class "input-group-btn"}
+	     		[:button {:class "btn btn-default" :type "submit" :id "glyph"}
+	       		[:i {:class "glyphicon glyphicon-search" :id "glyphicon-search"}]
 	      		]
+	      ]
 			]]
-			[:div {:class "col-lg-3"}
-				[:a { :class "btn btn-primary" :id "ask-btn"} "Ask" ]
-]]]
-
+		[:div {:class "col-lg-3"}
+				[:a {:href "/newpost" :class "btn btn-primary" :id "ask-btn"} "Ask" ]
+    ]
+    ]
+      ])
+   
 	[:div {:class "container" :id "middle"}
 		[:div {:class "page-header"}
 			[:h1 "Posts"]]
 		[:div {:class "row"}		
 			[:div {:class "col-lg-9" :id "allpost"}
-  (map 
+   (map 
  (fn [post]  
-    [:div {:class "post"}
-
-                              
+     [:div {:class "post"}      
 	[:div {:class "poststats left"}
 		[:div {:class "views"}
 			[:div {:class "number"}
@@ -53,28 +56,29 @@
 		[:h2 [:a {:href (str "/post/" (h (:questionid post)))} (:title post) ]  ]]
 [:div {:class "postby"}
 		"posted by " [:a {:href (str "/profile/" (h (:userid post)))} (:nick post)] " on "(:date post)]
- ]
+  ]
 ) posts)
 	[:div {:id "pag"}
- [:ul {:class "pagination pagination-lg"}  
-  ]]
+  [:ul {:class "pagination pagination-lg"}  
+   ]]
 			]
 
 			[:div {:class "col-lg-3" :id "side"}
-    (map 
+     (map 
  (fn [stat]  
-    [:div {:id "stats"}
+     [:div {:id "stats"}
 	[:span {:class "sidespan"}"Stats"]
 	[:div {:class "well"}
 		[:span {:class "stat"} [:strong (:user stat)  ] " Members"]
 		[:span {:class "stat"} [:strong (:question stat)] " Posts"] 
 		[:span {:class "stat last"} [:strong (:answer stat)] " Answers"] 
 	]]
-    ) stats)
+     ) stats)
 
 			]
    ]
    ]
+ ]
 )
 
 (defn postpage [post answers]
@@ -213,3 +217,32 @@
             ]]]]]
 ]) user)
   ) 
+(defn newpost [] 
+ [:div {:class "container"}
+	[:h1 {:class "page-header"} "Post new questions"]
+	[:div {:class "well"}
+    "Please be specific about your question"]
+	]
+		[:div {:class "container"}
+   [:div {:class "form-horizontal"}
+    (form/form-to [:post "/addpost"]
+      (anti-forgery/anti-forgery-field)
+				[:div {:class "form-group"}
+					[:label {:class "col-lg-2 col-lg-offset-1"} "Title:"]
+
+				[:div {:class "col-lg-9"}
+					[:input {:type "text" :class "form-control" :placeholder "What's your question about?" :autofocus "true" :required "true" :name "title" :title "Title can only have numbers and charachters"}]
+				]]
+    [:div {:class "form-group"}
+     [:label {:class "col-lg-2 col-lg-offset-1"} "Question:"]
+     [:div {:class "col-lg-9"}
+					[:textarea {:class "form-control" :rows "20" :name="text" :required "true"}]
+				]]
+
+				 [:div {:class "form-group"}
+					[:div {:class "col-lg-9 col-lg-offset-3"}
+            [:input {:type "submit" :class "btn btn-primary half" :value "Post" :name "btnSubmitPost"}]
+            [:input {:type "reset" :class "btn btn-primary half" :value "Reset"}]
+                ]
+				])]
+		])

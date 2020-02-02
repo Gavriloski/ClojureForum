@@ -7,7 +7,7 @@
      [hiccup.form :as form]
      [ring.util.anti-forgery :as anti-forgery]))
 
-(defn index [posts stats]
+(defn index [posts stats filter]
   [:div
     (form/form-to [:post "/"]
     (anti-forgery/anti-forgery-field)
@@ -15,7 +15,7 @@
 	[:div {:class "row"}
 		[:div {:class "col-lg-9"}
 			[:div {:class "input-group"}
-	   			[:input {:type "text" :name "filter" :class "form-control" :placeholder "Search by title" :id "search" }]
+	   			[:input {:type "text" :name "filter" :class "form-control" :placeholder "Search by title" :id "search" :value filter }]
 	   		[:div {:class "input-group-btn"}
 	     		[:button {:class "btn btn-default" :type "submit" :id "glyph"}
 	       		[:i {:class "glyphicon glyphicon-search" :id "glyphicon-search"}]

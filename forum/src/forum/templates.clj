@@ -15,7 +15,7 @@
 	[:div {:class "container"}
   [:ul {:class "nav navbar-nav"}
 
-			[:li [:a {:href "index.php"} "Home"]]
+			[:li [:a {:href "/"} "Home"]]
 			[:li [:a {:href ""} "Members Gallery"]]
 			[:li [:a {:href ""} "Contact"]]
    ]

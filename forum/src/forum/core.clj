@@ -12,7 +12,7 @@
             [forum.database :as db]))
 
 (defn index []
-   (template/main (page/index (db/posts) (db/stats)))
+   (template/main (page/index (db/posts) (db/stats) ""))
   )
 
 (defn post [id]
@@ -25,7 +25,7 @@
    (template/main (page/newpost))
   )
 (defn searchpost [filter]
-  
+  (template/main (page/index (db/postsfilter filter) (db/stats) filter))
   )
 (defroutes f_routes
   (GET "/" [] (index))

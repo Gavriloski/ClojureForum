@@ -55,6 +55,10 @@
    )
 )
 
+(defn contact []
+  (template/main (page/contact )
+  ))
+
 (defroutes f_routes
 (GET "/" [] (index))
 (GET "/post/:id/:del" [id del] (post id del "1"))
@@ -64,4 +68,5 @@
 (POST "/addpost" [title text user id] (addpost title text user id) )
 (GET "/gallery" [] (gallery) )
 (POST "/delete" [qid uid id] (deletequestion qid uid id))
+(GET "/contact" [] (contact) )
 (route/resources "/"))

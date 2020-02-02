@@ -310,3 +310,42 @@
             )avatars)
         ]
   )
+
+(defn contact []
+  [:div {:class "container"}
+
+    [:div {:class "page-header"}
+        [:h1 "Contact Us"]
+   ]
+    
+    [:div {:class "well"} "Have a question or comment? Fill out the following information and we will get back to you as soon as possible."]
+    [:div {:class "form-horizontal"}
+    (form/form-to [:post "/"]
+      (anti-forgery/anti-forgery-field)
+    	[:div {:class "form-group"}
+    		[:label {:for "email" :class "col-sm-2 control-label"} "E-mail:"]
+    		[:div {:class "col-sm-4"}
+    			[:input {:type "text" :class "form-control" :id "email" :name "email" :placeholder "E-mail Address" :required "true" :autofocus "true" :title "Enter valid email adress."}
+    		]
+    	]]
+    	
+    	[:div {:class "form-group"}
+      [:label {:for "name" :class "col-sm-2 control-label"} "Name:"]
+      [:div {:class "col-sm-4"}
+    			[:input {:type "text" :class "form-control" :id "name" :name "name" :placeholder "Name" :required "true" :autofocus "true"}
+    		]
+    	]]
+    	
+    	[:div {:class "form-group"}
+      [:label {:for "name" :class "col-sm-2 control-label"} "Message:"]
+      [:div {:class "col-sm-6"}
+    			[:textarea {:id="message" :name "message" :class "form-control" :placeholder "Your Message" :rows="5" :required "true"}]
+    	]]
+    
+    	[:div {:class "form-group"}
+    		[:div {:class "col-sm-offset-2 col-sm-6"}
+    			[:button {:type "submit" :class "btn btn-primary" :name "ContactSubmit"}"Send Message"]
+    		]]
+    )
+]]
+  )

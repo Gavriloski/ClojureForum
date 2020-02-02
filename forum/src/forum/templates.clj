@@ -17,7 +17,7 @@
 
 			[:li [:a {:href "/"} "Home"]]
 			[:li [:a {:href "/gallery"} "Members Gallery"]]
-			[:li [:a {:href ""} "Contact"]]
+			[:li [:a {:href "/contact"} "Contact"]]
    ]
   ;
 		[:div {:id "login" :class "right"}]

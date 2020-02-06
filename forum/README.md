@@ -3,6 +3,11 @@ Projekat radjen u okviru obaveza iz predmeta Alati i metode softverskog inzenjer
 Osmisljen je kao pregled foruma sa pitanjima i odgovorima. Korisnik je u mogucnosti da pregleda postove i profile postojecih korisnika, 
 kao i ukoliko je on registrovani korisnik, da dodaje i brise svoja pitanja.
 
+Reference: 
+https://www.exoscale.com/syslog/clojure-application-tutorial/
+https://github.com/weavejester/hiccup
+https://github.com/clojure/java.jdbc
+
 ## Usage
 
 Za pokretanje ove aplikacije potrebno je instalirati Leiningen i importovati SQL bazu podataka. 
